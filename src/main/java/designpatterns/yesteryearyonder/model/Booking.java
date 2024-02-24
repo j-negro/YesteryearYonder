@@ -1,5 +1,7 @@
 package designpatterns.yesteryearyonder.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +23,11 @@ public class Booking {
     @Column(name = "city", nullable = false, length = 64)
     private String city;
 
-    @Column(name = "date", nullable = false, length = 64)
-    private String date;
+    @Column(name = "startDate", nullable = false)
+    private LocalDate startDate;
+
+    @Column(name = "endDate", nullable = false)
+    private LocalDate endDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
@@ -36,9 +40,12 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(User user, TimeMachine timeMachine) {
+    public Booking(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
         this.user = user;
         this.timeMachine = timeMachine;
+        this.city = city;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Long getId() {
@@ -51,6 +58,18 @@ public class Booking {
 
     public TimeMachine getTimeMachine() {
         return timeMachine;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
 }
