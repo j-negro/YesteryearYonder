@@ -1,13 +1,18 @@
 package designpatterns.yesteryearyonder.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "bookings")
 public class Booking {
 
     @Id
@@ -20,13 +25,11 @@ public class Booking {
     @Column(name = "date", nullable = false, length = 64)
     private String date;
 
-    @ManyToOne
-    @MapsId("userId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @MapsId("timeMachineId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "timemachine_id")
     private TimeMachine timeMachine;
 
