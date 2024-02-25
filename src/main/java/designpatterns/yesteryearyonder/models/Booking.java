@@ -1,4 +1,4 @@
-package designpatterns.yesteryearyonder.model;
+package designpatterns.yesteryearyonder.models;
 
 import java.time.LocalDate;
 

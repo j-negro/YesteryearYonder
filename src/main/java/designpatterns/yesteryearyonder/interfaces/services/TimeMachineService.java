@@ -1,10 +1,9 @@
-package designpatterns.yesteryearyonder.interfaces.daos;
+package designpatterns.yesteryearyonder.interfaces.services;
 
 import java.util.Set;
-
 import designpatterns.yesteryearyonder.models.TimeMachine;
 
-public interface TimeMachineDao {
+public interface TimeMachineService {
 
     TimeMachine create(String name);
 

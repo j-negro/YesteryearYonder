@@ -1,11 +1,11 @@
-package designpatterns.yesteryearyonder.repository;
+package designpatterns.yesteryearyonder.repositories;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import designpatterns.yesteryearyonder.interfaces.daos.UserDao;
-import designpatterns.yesteryearyonder.model.User;
+import designpatterns.yesteryearyonder.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

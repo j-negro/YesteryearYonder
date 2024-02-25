@@ -1,13 +1,13 @@
-package designpatterns.yesteryearyonder.repository;
+package designpatterns.yesteryearyonder.repositories;
 
 import java.time.LocalDate;
 
 import org.springframework.stereotype.Repository;
 
 import designpatterns.yesteryearyonder.interfaces.daos.BookingDao;
-import designpatterns.yesteryearyonder.model.Booking;
-import designpatterns.yesteryearyonder.model.TimeMachine;
-import designpatterns.yesteryearyonder.model.User;
+import designpatterns.yesteryearyonder.models.Booking;
+import designpatterns.yesteryearyonder.models.TimeMachine;
+import designpatterns.yesteryearyonder.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 

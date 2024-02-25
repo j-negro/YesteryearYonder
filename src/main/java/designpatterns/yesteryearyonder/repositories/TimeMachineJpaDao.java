@@ -1,11 +1,11 @@
-package designpatterns.yesteryearyonder.repository;
+package designpatterns.yesteryearyonder.repositories;
 
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import designpatterns.yesteryearyonder.interfaces.daos.TimeMachineDao;
-import designpatterns.yesteryearyonder.model.TimeMachine;
+import designpatterns.yesteryearyonder.models.TimeMachine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
