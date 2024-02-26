@@ -2,6 +2,7 @@ package designpatterns.yesteryearyonder.models;
 
 import java.time.LocalDate;
 
+import designpatterns.yesteryearyonder.interfaces.services.BookingState;
 import jakarta.persistence.*;
 
 @Entity
