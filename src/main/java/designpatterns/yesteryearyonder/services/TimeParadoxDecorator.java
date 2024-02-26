@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TimeParadoxDecorator implements BookingService {
 
-    @Autowired
+
     private final BookingService bookingService;
 
     public TimeParadoxDecorator(BookingService bookingService) {
