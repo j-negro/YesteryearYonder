@@ -42,7 +42,7 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingNotFoundException();
         }
 
-        booking.get().getState().confirm(booking.get());
+        // booking.get().getState().confirm(booking.get());
     }
 
     @Override
@@ -54,7 +54,7 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingNotFoundException();
         }
 
-        booking.get().getState().cancel(booking.get());
+        // booking.get().getState().cancel(booking.get());
     }
 
     private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
