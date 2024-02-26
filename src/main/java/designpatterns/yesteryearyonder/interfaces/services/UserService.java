@@ -12,4 +12,6 @@ public interface UserService {
 
     User create(String username, String password, String email);
 
+    boolean checkUserBookings(User user);
+
 }

@@ -1,6 +1,7 @@
 package designpatterns.yesteryearyonder.interfaces.services;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
@@ -13,7 +14,11 @@ public interface BookingService {
 
     void cancel(long bookingId);
 
+    boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate);
+
     void confirmBooking(long bookingId);
+
+    Optional<Booking> findById(long bookingId);
 
     void cancelBooking(long bookingId);
 
