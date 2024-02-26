@@ -7,7 +7,7 @@ public class PendingBookingState implements BookingState {
 
     @Override
     public void confirm(Booking booking) {
-        booking.setState(new ConfirmedBookingState());
+        // booking.setState(new ConfirmedBookingState());
     }
 
     @Override

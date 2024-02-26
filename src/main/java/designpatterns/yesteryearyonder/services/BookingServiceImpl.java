@@ -2,6 +2,7 @@ package designpatterns.yesteryearyonder.services;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +12,6 @@ import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
 import designpatterns.yesteryearyonder.models.exception.BookingNotFoundException;
-import designpatterns.yesteryearyonder.models.exception.TimeParadoxException;
 
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
-        if (!isValidTimePeriod(startDate, endDate)) {
-            throw new TimeParadoxException("Time paradox detected! The selected time period is invalid.");
-        }
         return bookingDao.create(user, timeMachine, city, startDate, endDate);
     }
 
@@ -42,7 +39,7 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingNotFoundException();
         }
 
-        booking.get().getState().confirm(booking.get());
+        // booking.get().getState().confirm(booking.get());
     }
 
     @Override
@@ -54,12 +51,31 @@ public class BookingServiceImpl implements BookingService {
             throw new BookingNotFoundException();
         }
 
-        booking.get().getState().cancel(booking.get());
+        // booking.get().getState().cancel(booking.get());
     }
 
-    private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
+    @Override
+    public boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         return !endDate.isAfter(currentDate) && !endDate.isBefore(startDate);
+    }
+
+    @Override
+    public boolean checkBookingCollision(String city, LocalDate startDate, LocalDate endDate) {
+
+        Set<Booking> collidingBookings = bookingDao.findByTimeSpace(city, startDate, endDate);
+
+        if (collidingBookings.isEmpty()) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public Optional<Booking> findById(long bookingId) {
+        return bookingDao.findById(bookingId);
     }
 
 }

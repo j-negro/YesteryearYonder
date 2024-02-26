@@ -1,21 +1,13 @@
 package designpatterns.yesteryearyonder.models;
 
 public class TimeTurner extends TimeMachine {
-    private String name;
     private int maxTimeTravelDays;
     private int capacity;
 
     public TimeTurner(String name) {
-        this.name = name;
+        super(name);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
     public int getMaxTimeTravelDays() {
         return maxTimeTravelDays;
     }
@@ -27,6 +19,7 @@ public class TimeTurner extends TimeMachine {
     public int getCapacity() {
         return capacity;
     }
+
     public void setCapacity(int i) {
     }
 

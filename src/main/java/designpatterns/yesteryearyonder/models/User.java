@@ -57,4 +57,7 @@ public class User {
         return email;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
 }
