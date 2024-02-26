@@ -8,4 +8,6 @@ public interface TimeMachineService {
     TimeMachine create(String name);
 
     Set<TimeMachine> getTimeMachines(int limit, int offset);
+
+    TimeMachine createTimeTurner(String name);
 }

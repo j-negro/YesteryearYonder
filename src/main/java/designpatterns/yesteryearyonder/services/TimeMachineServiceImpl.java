@@ -23,4 +23,9 @@ public class TimeMachineServiceImpl implements TimeMachineService {
         return timeMachineDao.getTimeMachines(limit, offset);
     }
 
+    @Override
+    public TimeMachine createTimeTurner(String name) {
+        return new TimeMachine("Time Turner", name);
+    }
+
 }
