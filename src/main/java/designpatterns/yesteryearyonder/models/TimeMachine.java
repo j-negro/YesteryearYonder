@@ -33,6 +33,9 @@ public class TimeMachine {
         this.name = name;
     }
 
+    public TimeMachine(String timeTurner, String name) {
+    }
+
     public Long getTimeMachineId() {
         return timeMachineId;
     }
