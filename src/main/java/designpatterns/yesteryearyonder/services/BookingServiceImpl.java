@@ -12,8 +12,6 @@ import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
 import designpatterns.yesteryearyonder.models.exception.BookingNotFoundException;
-import designpatterns.yesteryearyonder.models.exception.InvalidDateRangeException;
-import designpatterns.yesteryearyonder.models.exception.TimeParadoxException;
 
 import org.springframework.stereotype.Service;
 
@@ -25,14 +23,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
-        if (!isValidTimePeriod(startDate, endDate)) {
-            throw new InvalidDateRangeException();
-        }
-
-        if (!checkBookingCollision(city, startDate, endDate)) {
-            throw new TimeParadoxException();
-        }
-
         return bookingDao.create(user, timeMachine, city, startDate, endDate);
     }
 
@@ -64,7 +54,8 @@ public class BookingServiceImpl implements BookingService {
         // booking.get().getState().cancel(booking.get());
     }
 
-    private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
+    @Override
+    public boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         return !endDate.isAfter(currentDate) && !endDate.isBefore(startDate);
     }
@@ -80,6 +71,11 @@ public class BookingServiceImpl implements BookingService {
 
         return false;
 
+    }
+
+    @Override
+    public Optional<Booking> findById(long bookingId) {
+        return bookingDao.findById(bookingId);
     }
 
 }

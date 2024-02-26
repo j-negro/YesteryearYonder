@@ -1,5 +1,6 @@
 package designpatterns.yesteryearyonder.repositories;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,16 @@ public class TimeMachineJpaDao implements TimeMachineDao {
         return Set.copyOf(
                 entityManager.createQuery("SELECT t FROM TimeMachine t", TimeMachine.class).setFirstResult(offset)
                         .setMaxResults(limit).getResultList());
+    }
+
+    @Override
+    public Optional<TimeMachine> getTimeMachineById(long id) {
+        try {
+            final TimeMachine timeMachine = entityManager.find(TimeMachine.class, id);
+            return Optional.of(timeMachine);
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 
 }

@@ -44,4 +44,8 @@ public class TimeMachine {
         return timeMachineId;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
 }
