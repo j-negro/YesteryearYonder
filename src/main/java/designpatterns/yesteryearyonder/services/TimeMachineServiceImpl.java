@@ -3,11 +3,13 @@ package designpatterns.yesteryearyonder.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import designpatterns.yesteryearyonder.interfaces.daos.TimeMachineDao;
 import designpatterns.yesteryearyonder.interfaces.services.TimeMachineService;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 
+@Service
 public class TimeMachineServiceImpl implements TimeMachineService {
 
     @Autowired
