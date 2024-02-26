@@ -8,5 +8,8 @@ public interface UserService {
 
     Optional<User> getUserByUsername(String username);
 
+    Optional<User> getUserByEmail(String email);
+
     User create(String username, String password, String email);
+
 }
