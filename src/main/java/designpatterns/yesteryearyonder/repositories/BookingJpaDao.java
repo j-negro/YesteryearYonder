@@ -54,4 +54,9 @@ public class BookingJpaDao implements BookingDao {
         query.setParameter("endDate", endDate);
         return Set.copyOf(query.getResultList());
     }
+
+    @Override
+    public boolean existsByTimeMachine(TimeMachine timeMachine) {
+        return false;
+    }
 }
