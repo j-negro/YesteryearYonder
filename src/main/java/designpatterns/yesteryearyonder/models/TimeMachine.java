@@ -48,4 +48,7 @@ public class TimeMachine {
         return bookings;
     }
 
+    public boolean isTimeTurner() {
+        return true;
+    }
 }
