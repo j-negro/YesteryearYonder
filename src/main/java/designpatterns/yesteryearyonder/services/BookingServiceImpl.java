@@ -31,6 +31,18 @@ public class BookingServiceImpl implements BookingService {
         bookingDao.cancel(bookingId);
     }
 
+    @Override
+    public void confirmBooking(long bookingId) {
+        Booking booking = bookingDao.findById(bookingId);
+        booking.getState().confirm(booking);
+    }
+
+    @Override
+    public void cancelBooking(long bookingId) {
+        Booking booking = bookingDao.findById(bookingId);
+        booking.getState().cancel(booking);
+    }
+
     private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         return !endDate.isAfter(currentDate) && !endDate.isBefore(startDate);

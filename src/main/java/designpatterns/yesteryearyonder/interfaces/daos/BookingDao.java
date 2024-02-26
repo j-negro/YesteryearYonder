@@ -13,4 +13,5 @@ public interface BookingDao {
 
     void cancel(long bookingId);
 
+    Booking findById(long bookingId);
 }
