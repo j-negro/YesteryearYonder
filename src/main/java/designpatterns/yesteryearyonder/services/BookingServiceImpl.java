@@ -2,6 +2,7 @@ package designpatterns.yesteryearyonder.services;
 
 import java.time.LocalDate;
 
+import designpatterns.yesteryearyonder.exception.TimeParadoxException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import designpatterns.yesteryearyonder.interfaces.daos.BookingDao;
@@ -9,7 +10,9 @@ import designpatterns.yesteryearyonder.interfaces.services.BookingService;
 import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
@@ -17,6 +20,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
+        if (!isValidTimePeriod(startDate, endDate)) {
+            throw new TimeParadoxException("Time paradox detected! The selected time period is invalid.");
+        }
         return bookingDao.create(user, timeMachine, city, startDate, endDate);
     }
 
@@ -24,5 +30,11 @@ public class BookingServiceImpl implements BookingService {
     public void cancel(long bookingId) {
         bookingDao.cancel(bookingId);
     }
+
+    private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
+        LocalDate currentDate = LocalDate.now();
+        return !endDate.isAfter(currentDate) && !endDate.isBefore(startDate);
+    }
+
 
 }
