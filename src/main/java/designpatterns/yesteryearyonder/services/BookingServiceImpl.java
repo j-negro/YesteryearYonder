@@ -1,8 +1,8 @@
 package designpatterns.yesteryearyonder.services;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
-import designpatterns.yesteryearyonder.exception.TimeParadoxException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import designpatterns.yesteryearyonder.interfaces.daos.BookingDao;
@@ -10,6 +10,9 @@ import designpatterns.yesteryearyonder.interfaces.services.BookingService;
 import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
+import designpatterns.yesteryearyonder.models.exception.BookingNotFoundException;
+import designpatterns.yesteryearyonder.models.exception.TimeParadoxException;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,20 +36,30 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void confirmBooking(long bookingId) {
-        Booking booking = bookingDao.findById(bookingId);
-        booking.getState().confirm(booking);
+        Optional<Booking> booking = bookingDao.findById(bookingId);
+
+        if (booking.isEmpty()) {
+            throw new BookingNotFoundException();
+        }
+
+        booking.get().getState().confirm(booking.get());
     }
 
     @Override
     public void cancelBooking(long bookingId) {
-        Booking booking = bookingDao.findById(bookingId);
-        booking.getState().cancel(booking);
+
+        Optional<Booking> booking = bookingDao.findById(bookingId);
+
+        if (booking.isEmpty()) {
+            throw new BookingNotFoundException();
+        }
+
+        booking.get().getState().cancel(booking.get());
     }
 
     private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         return !endDate.isAfter(currentDate) && !endDate.isBefore(startDate);
     }
-
 
 }

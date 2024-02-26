@@ -1,6 +1,7 @@
 package designpatterns.yesteryearyonder.interfaces.daos;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
@@ -13,5 +14,5 @@ public interface BookingDao {
 
     void cancel(long bookingId);
 
-    Booking findById(long bookingId);
+    Optional<Booking> findById(long bookingId);
 }

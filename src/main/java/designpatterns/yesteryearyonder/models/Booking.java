@@ -3,7 +3,6 @@ package designpatterns.yesteryearyonder.models;
 import java.time.LocalDate;
 
 import designpatterns.yesteryearyonder.interfaces.services.BookingState;
-import designpatterns.yesteryearyonder.models.states.ConfirmedBookingState;
 import jakarta.persistence.*;
 
 @Entity
@@ -31,10 +30,10 @@ public class Booking {
     @JoinColumn(name = "timemachine_id")
     private TimeMachine timeMachine;
 
-
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private BookingState state;
+
     public BookingState getState() {
         return state;
     }

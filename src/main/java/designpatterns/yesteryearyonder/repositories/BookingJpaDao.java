@@ -1,6 +1,7 @@
 package designpatterns.yesteryearyonder.repositories;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +30,15 @@ public class BookingJpaDao implements BookingDao {
     public void cancel(long bookingId) {
         final Booking booking = entityManager.find(Booking.class, bookingId);
         entityManager.remove(booking);
+    }
+
+    @Override
+    public Optional<Booking> findById(long bookingId) {
+        try {
+            final Booking booking = entityManager.find(Booking.class, bookingId);
+            return Optional.of(booking);
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 }
