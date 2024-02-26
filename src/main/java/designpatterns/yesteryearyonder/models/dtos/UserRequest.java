@@ -1,6 +1,8 @@
 package designpatterns.yesteryearyonder.models.dtos;
 
-public class UserRequest {
+import java.io.Serializable;
+
+public class UserRequest implements Serializable {
     private String username;
     private String email;
     private String password;

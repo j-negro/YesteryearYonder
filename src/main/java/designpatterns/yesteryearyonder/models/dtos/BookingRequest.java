@@ -1,25 +1,36 @@
 package designpatterns.yesteryearyonder.models.dtos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class BookingRequest {
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class BookingRequest implements Serializable {
 
     private String city;
+
+    @JsonFormat(pattern = "YYYY-MM-DD")
+    @DateTimeFormat(pattern = "YYYY-MM-DD")
     private LocalDate startDate;
+
+    @JsonFormat(pattern = "YYYY-MM-DD")
+    @DateTimeFormat(pattern = "YYYY-MM-DD")
     private LocalDate endDate;
-    private long userId;
+
+    private String username;
     private long timeMachineId;
 
     public BookingRequest(
             String city,
             LocalDate startDate,
             LocalDate endDate,
-            long userId,
-            long timeMachineId) {
+            String username, long timeMachineId) {
         this.city = city;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.userId = userId;
+        this.username = username;
         this.timeMachineId = timeMachineId;
     }
 
@@ -35,8 +46,8 @@ public class BookingRequest {
         return endDate;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
     public long getTimeMachineId() {

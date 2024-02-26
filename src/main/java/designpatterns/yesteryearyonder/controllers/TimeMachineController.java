@@ -1,5 +1,6 @@
 package designpatterns.yesteryearyonder.controllers;
 
+import java.net.URI;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,26 @@ public class TimeMachineController {
 
     }
 
-    @PostMapping
+    @PostMapping("/time-machine")
     public ResponseEntity<TimeMachine> createTimeMachine(@RequestBody TimeMachineRequest request) {
 
         if (request == null) {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(timeMachineService.create(request.getName()));
+        TimeMachine timeMachine = timeMachineService.create(request.getName());
+
+        if (timeMachine == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        URI location = URI.create("/time-machine/" + timeMachine.getTimeMachineId());
+
+        if (location == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.created(location).body(timeMachine);
 
     }
 

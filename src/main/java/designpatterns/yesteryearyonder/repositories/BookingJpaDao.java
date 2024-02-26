@@ -13,6 +13,7 @@ import designpatterns.yesteryearyonder.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 
 @Repository
 public class BookingJpaDao implements BookingDao {
@@ -21,6 +22,7 @@ public class BookingJpaDao implements BookingDao {
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate,
             LocalDate endDate) {
         final Booking booking = new Booking(user, timeMachine, city, startDate, endDate);

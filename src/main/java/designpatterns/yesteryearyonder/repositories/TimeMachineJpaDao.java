@@ -9,6 +9,8 @@ import designpatterns.yesteryearyonder.interfaces.daos.TimeMachineDao;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.TransactionScoped;
+import jakarta.transaction.Transactional;
 
 @Repository
 public class TimeMachineJpaDao implements TimeMachineDao {
@@ -17,6 +19,7 @@ public class TimeMachineJpaDao implements TimeMachineDao {
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public TimeMachine create(String name) {
         final TimeMachine timeMachine = new TimeMachine(name);
         entityManager.persist(timeMachine);
