@@ -44,6 +44,9 @@ public class TimeMachine {
         return timeMachineId;
     }
 
+    public boolean isTimeTurner() {
+        return this.name.toLowerCase().contains("time turner");
+    }
     public Set<Booking> getBookings() {
         return bookings;
     }

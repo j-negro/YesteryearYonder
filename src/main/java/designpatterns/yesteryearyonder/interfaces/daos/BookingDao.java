@@ -18,4 +18,6 @@ public interface BookingDao {
     Optional<Booking> findById(long bookingId);
 
     Set<Booking> findByTimeSpace(String city, LocalDate startDate, LocalDate endDate);
+
+    boolean existsByTimeMachine(TimeMachine timeMachine);
 }
