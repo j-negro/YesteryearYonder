@@ -16,4 +16,6 @@ public interface BookingService {
     void confirmBooking(long bookingId);
 
     void cancelBooking(long bookingId);
+
+    boolean checkBookingCollision(String city, LocalDate startDate, LocalDate endDate);
 }

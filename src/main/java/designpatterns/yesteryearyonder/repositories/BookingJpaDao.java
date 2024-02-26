@@ -2,6 +2,7 @@ package designpatterns.yesteryearyonder.repositories;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Repository
 public class BookingJpaDao implements BookingDao {
@@ -40,5 +42,16 @@ public class BookingJpaDao implements BookingDao {
         } catch (IllegalArgumentException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Set<Booking> findByTimeSpace(String city, LocalDate startDate, LocalDate endDate) {
+        TypedQuery<Booking> query = entityManager.createQuery(
+                "SELECT b FROM Booking b WHERE b.city = :city AND b.startDate <= :endDate AND b.endDate >= :startDate",
+                Booking.class);
+        query.setParameter("city", city);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        return Set.copyOf(query.getResultList());
     }
 }

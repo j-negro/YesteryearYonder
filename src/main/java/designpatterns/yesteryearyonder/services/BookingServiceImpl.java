@@ -2,6 +2,7 @@ package designpatterns.yesteryearyonder.services;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,7 @@ import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
 import designpatterns.yesteryearyonder.models.exception.BookingNotFoundException;
+import designpatterns.yesteryearyonder.models.exception.InvalidDateRangeException;
 import designpatterns.yesteryearyonder.models.exception.TimeParadoxException;
 
 import org.springframework.stereotype.Service;
@@ -24,8 +26,13 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
         if (!isValidTimePeriod(startDate, endDate)) {
-            throw new TimeParadoxException("Time paradox detected! The selected time period is invalid.");
+            throw new InvalidDateRangeException();
         }
+
+        if (!checkBookingCollision(city, startDate, endDate)) {
+            throw new TimeParadoxException();
+        }
+
         return bookingDao.create(user, timeMachine, city, startDate, endDate);
     }
 
@@ -60,6 +67,19 @@ public class BookingServiceImpl implements BookingService {
     private boolean isValidTimePeriod(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         return !endDate.isAfter(currentDate) && !endDate.isBefore(startDate);
+    }
+
+    @Override
+    public boolean checkBookingCollision(String city, LocalDate startDate, LocalDate endDate) {
+
+        Set<Booking> collidingBookings = bookingDao.findByTimeSpace(city, startDate, endDate);
+
+        if (collidingBookings.isEmpty()) {
+            return true;
+        }
+
+        return false;
+
     }
 
 }
