@@ -11,7 +11,7 @@ public class YesteryearYonderApplication {
 
 	@RequestMapping("/")
 	public String helloWorld() {
-		return "Hello, Worldddddd!";
+		return "Welcome to Yesteryear Yonder";
 	}
 
 	public static void main(String[] args) {

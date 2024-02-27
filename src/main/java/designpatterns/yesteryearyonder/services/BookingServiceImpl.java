@@ -13,9 +13,11 @@ import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
 import designpatterns.yesteryearyonder.models.exception.BookingNotFoundException;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
