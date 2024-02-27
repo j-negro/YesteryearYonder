@@ -3,9 +3,7 @@ package designpatterns.yesteryearyonder.services;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import designpatterns.yesteryearyonder.interfaces.daos.BookingDao;
 import designpatterns.yesteryearyonder.interfaces.services.BookingService;
 import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
