@@ -13,8 +13,6 @@ public interface BookingDao {
     Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate,
             LocalDate endDate);
 
-    void cancel(long bookingId);
-
     Optional<Booking> findById(long bookingId);
 
     Set<Booking> findByTimeSpace(String city, LocalDate startDate, LocalDate endDate);

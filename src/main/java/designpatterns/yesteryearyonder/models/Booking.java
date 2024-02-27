@@ -2,6 +2,7 @@ package designpatterns.yesteryearyonder.models;
 
 import java.time.LocalDate;
 
+import designpatterns.yesteryearyonder.services.BookingStatus;
 import jakarta.persistence.*;
 
 @Entity
@@ -28,6 +29,9 @@ public class Booking {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "timemachine_id")
     private TimeMachine timeMachine;
+
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status = BookingStatus.ACTIVE;
 
     public Booking() {
     }
@@ -64,4 +68,11 @@ public class Booking {
         return endDate;
     }
 
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public void cancel() {
+        status = BookingStatus.CANCELLED;
+    }
 }

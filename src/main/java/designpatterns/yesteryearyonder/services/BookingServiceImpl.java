@@ -29,31 +29,9 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void cancel(long bookingId) {
-        bookingDao.cancel(bookingId);
-    }
-
-    @Override
-    public void confirmBooking(long bookingId) {
-        Optional<Booking> booking = bookingDao.findById(bookingId);
-
-        if (booking.isEmpty()) {
-            throw new BookingNotFoundException();
-        }
-
-        // booking.get().getState().confirm(booking.get());
-    }
-
-    @Override
-    public void cancelBooking(long bookingId) {
-
-        Optional<Booking> booking = bookingDao.findById(bookingId);
-
-        if (booking.isEmpty()) {
-            throw new BookingNotFoundException();
-        }
-
-        // booking.get().getState().cancel(booking.get());
+    public void cancel(Booking booking) {
+        // Future work: notify other users about the newly available space-time slot
+        booking.cancel();
     }
 
     @Override

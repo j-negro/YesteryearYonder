@@ -37,8 +37,8 @@ public class TimeParadoxDecoratorImpl implements TimeParadoxDecorator {
     // Other methods like cancel, confirmBooking, cancelBooking, and
     // checkBookingCollision are directly delegated to the wrapped bookingService
     @Override
-    public void cancel(long bookingId) {
-        bookingService.cancel(bookingId);
+    public void cancel(Booking booking) {
+        bookingService.cancel(booking);
     }
 
     @Override
@@ -47,18 +47,8 @@ public class TimeParadoxDecoratorImpl implements TimeParadoxDecorator {
     }
 
     @Override
-    public void confirmBooking(long bookingId) {
-        bookingService.confirmBooking(bookingId);
-    }
-
-    @Override
     public Optional<Booking> findById(long bookingId) {
         return bookingService.findById(bookingId);
-    }
-
-    @Override
-    public void cancelBooking(long bookingId) {
-        bookingService.cancelBooking(bookingId);
     }
 
     @Override

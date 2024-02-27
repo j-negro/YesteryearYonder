@@ -9,7 +9,6 @@ import designpatterns.yesteryearyonder.interfaces.daos.TimeMachineDao;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
 
 @Repository

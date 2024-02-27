@@ -76,7 +76,7 @@ public class BookingFacadeImpl implements BookingFacade {
             throw new IllegalArgumentException("Booking does not exist");
         }
 
-        bookingService.cancel(bookingId);
+        bookingService.cancel(optionalBooking.get());
     }
 
 }

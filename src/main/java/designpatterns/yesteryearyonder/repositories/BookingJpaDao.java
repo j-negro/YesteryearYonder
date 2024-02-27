@@ -31,12 +31,6 @@ public class BookingJpaDao implements BookingDao {
     }
 
     @Override
-    public void cancel(long bookingId) {
-        final Booking booking = entityManager.find(Booking.class, bookingId);
-        entityManager.remove(booking); // TODO: Soft delete
-    }
-
-    @Override
     public Optional<Booking> findById(long bookingId) {
         try {
             final Booking booking = entityManager.find(Booking.class, bookingId);
