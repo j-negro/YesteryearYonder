@@ -4,41 +4,33 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import designpatterns.yesteryearyonder.interfaces.services.BookingService;
-import designpatterns.yesteryearyonder.interfaces.services.TimeParadoxDecorator;
+import designpatterns.yesteryearyonder.interfaces.services.EmailService;
+import designpatterns.yesteryearyonder.interfaces.services.BookingEmailDecorator;
 import designpatterns.yesteryearyonder.models.Booking;
 import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
-import designpatterns.yesteryearyonder.models.exception.TimeParadoxException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TimeParadoxDecoratorImpl implements TimeParadoxDecorator {
+public class BookingEmailDecoratorImpl implements BookingEmailDecorator {
 
-    private final BookingService bookingService;
+    @Autowired
+    private BookingService bookingService;
+    @Autowired
+    private EmailService emailService;
 
-    public TimeParadoxDecoratorImpl(BookingService bookingService) {
-        this.bookingService = bookingService;
-    }
-
+    // Almost all methods are directly delegated to the wrapped bookingService
     @Override
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
-        if (endDate.isAfter(LocalDate.now())) {
-            throw new TimeParadoxException();
-        }
-
-        if (timeMachine.isTimeTurner() && bookingService.checkBookingCollision(city, startDate, endDate)) {
-            throw new TimeParadoxException();
-        }
-
         return bookingService.create(user, timeMachine, city, startDate, endDate);
     }
 
-    // Other methods like cancel, confirmBooking, cancelBooking, and
-    // checkBookingCollision are directly delegated to the wrapped bookingService
     @Override
     public void cancel(Booking booking) {
         bookingService.cancel(booking);
+        notifyUsersOfNewSlot(booking.getCity(), booking.getStartDate().toString(), booking.getEndDate().toString());
     }
 
     @Override
@@ -57,8 +49,7 @@ public class TimeParadoxDecoratorImpl implements TimeParadoxDecorator {
     }
 
     @Override
-    public void test() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'test'");
+    public void notifyUsersOfNewSlot(String city, String startDate, String endDate) {
+        emailService.notifyAvailableSpaceTimeSlot(city, startDate, endDate);
     }
 }

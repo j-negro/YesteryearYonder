@@ -1,6 +1,7 @@
 package designpatterns.yesteryearyonder.repositories;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -48,5 +49,11 @@ public class UserJpaDao implements UserDao {
         final User user = new User(username, password, email);
         entityManager.persist(user);
         return user;
+    }
+
+    @Override
+    public Set<String> getUserEmails() {
+        final TypedQuery<String> query = entityManager.createQuery("SELECT u.email FROM User u", String.class);
+        return Set.copyOf(query.getResultList());
     }
 }

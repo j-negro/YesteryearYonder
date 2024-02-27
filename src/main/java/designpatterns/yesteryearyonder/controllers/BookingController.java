@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,11 +46,9 @@ public class BookingController {
         }
     }
 
-    // Add post to "/booking/{id}/cancel" to cancel a booking
-
-    @PostMapping("/booking/{id}/cancel")
-    public ResponseEntity<Booking> cancelBooking(
-            @PathVariable("id") long id) {
+    @DeleteMapping("/booking/{id}")
+    public ResponseEntity<?> cancelBooking(
+            @PathVariable long id) {
 
         if (id == 0) {
             return ResponseEntity.badRequest().build();
@@ -61,6 +60,7 @@ public class BookingController {
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
+            System.err.println(e);
             return ResponseEntity.badRequest().build();
         }
     }

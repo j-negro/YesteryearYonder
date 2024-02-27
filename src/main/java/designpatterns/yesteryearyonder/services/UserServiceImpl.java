@@ -1,6 +1,7 @@
 package designpatterns.yesteryearyonder.services;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,12 @@ public class UserServiceImpl implements UserService {
 
         return user.getBookings().size() < MAX_BOOKINGS_PER_USER;
 
+    }
+
+    @Override
+    public Set<String> getUserEmails() {
+
+        return userDao.getUserEmails();
     }
 
 }

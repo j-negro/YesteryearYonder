@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import designpatterns.yesteryearyonder.interfaces.services.BookingEmailDecorator;
 import designpatterns.yesteryearyonder.interfaces.services.BookingFacade;
-import designpatterns.yesteryearyonder.interfaces.services.BookingService;
 import designpatterns.yesteryearyonder.interfaces.services.TimeMachineService;
 import designpatterns.yesteryearyonder.interfaces.services.UserService;
 import designpatterns.yesteryearyonder.models.Booking;
@@ -22,7 +22,7 @@ import designpatterns.yesteryearyonder.models.exception.TimeParadoxException;
 public class BookingFacadeImpl implements BookingFacade {
 
     @Autowired
-    private BookingService bookingService;
+    private BookingEmailDecorator bookingService;
 
     @Autowired
     private UserService userService;
