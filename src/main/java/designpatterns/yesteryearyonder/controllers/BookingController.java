@@ -60,7 +60,6 @@ public class BookingController {
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
-            System.err.println(e);
             return ResponseEntity.badRequest().build();
         }
     }

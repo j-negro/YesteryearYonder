@@ -21,6 +21,11 @@ public class BookingEmailDecoratorImpl implements BookingEmailDecorator {
     @Autowired
     private EmailService emailService;
 
+    @Override
+    public void notifyUsersOfNewSlot(String city, String startDate, String endDate) {
+        emailService.notifyAvailableSpaceTimeSlot(city, startDate, endDate);
+    }
+
     // Almost all methods are directly delegated to the wrapped bookingService
     @Override
     public Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate, LocalDate endDate) {
@@ -48,8 +53,4 @@ public class BookingEmailDecoratorImpl implements BookingEmailDecorator {
         return bookingService.checkBookingCollision(city, startDate, endDate);
     }
 
-    @Override
-    public void notifyUsersOfNewSlot(String city, String startDate, String endDate) {
-        emailService.notifyAvailableSpaceTimeSlot(city, startDate, endDate);
-    }
 }
