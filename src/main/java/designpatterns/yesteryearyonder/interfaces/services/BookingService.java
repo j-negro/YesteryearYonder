@@ -8,7 +8,6 @@ import designpatterns.yesteryearyonder.models.TimeMachine;
 import designpatterns.yesteryearyonder.models.User;
 
 public interface BookingService {
-
     Booking create(User user, TimeMachine timeMachine, String city, LocalDate startDate,
             LocalDate endDate);
 
