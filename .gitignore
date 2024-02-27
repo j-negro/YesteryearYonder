@@ -19,3 +19,4 @@ buildNumber.properties
 
 # IDE
 .vscode
+src/main/docker/docker-compose.yml
